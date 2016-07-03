@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QDebug>
 #include <QtMath>
+#include <QtBluetooth/QtBluetooth>
 
 namespace Ui {
 class MainWindow;
@@ -24,9 +25,17 @@ private:
     QAccelerometer *accel;
     QTimer *t1;
     QAccelerometerReading *readings;
+    QBluetoothDeviceDiscoveryAgent *bluetooth;
+    QBluetoothLocalDevice *localDevice;
+    QBluetoothServiceDiscoveryAgent *discoveryAgent;
 
 private slots:
     void readAccel();
+    void newDeviceFound(QBluetoothDeviceInfo btInfo);
+    void on_disconnectButton_clicked();
+    void on_scanButton_clicked();
+    void setScanButtonEnabled();
+    void on_listWidget_doubleClicked(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H

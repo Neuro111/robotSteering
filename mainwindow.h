@@ -27,7 +27,7 @@ private:
     QAccelerometerReading *readings;
     QBluetoothDeviceDiscoveryAgent *bluetooth;
     QBluetoothLocalDevice *localDevice;
-    QBluetoothServiceDiscoveryAgent *discoveryAgent;
+
 
 private slots:
     void readAccel();

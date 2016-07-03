@@ -64,10 +64,10 @@ void MainWindow::newDeviceFound(QBluetoothDeviceInfo btInfo)
         QListWidgetItem *item = new QListWidgetItem(btInfo.name());
         item->setData(Qt::UserRole,btInfo.address().toString());
         QBluetoothLocalDevice::Pairing pairingStatus = localDevice->pairingStatus(btInfo.address());
-//        if (pairingStatus == QBluetoothLocalDevice::Paired || pairingStatus == QBluetoothLocalDevice::AuthorizedPaired )
-//            item->setTextColor(QColor(Qt::green));
-//        else
-//            item->setTextColor(QColor(Qt::red));
+        if (pairingStatus == QBluetoothLocalDevice::Paired || pairingStatus == QBluetoothLocalDevice::AuthorizedPaired )
+            item->setTextColor(QColor(Qt::green));
+        else
+            item->setTextColor(QColor(Qt::red));
 
         ui->listWidget->addItem(item);
     }
@@ -96,9 +96,5 @@ void MainWindow::on_listWidget_doubleClicked(const QModelIndex &index)
 {
     QString name = index.data(Qt::EditRole).toString();
     QString address = index.data(Qt::UserRole).toString();
-    QBluetoothAddress adapterAddress = localDevice->address();
-    discoveryAgent = new QBluetoothServiceDiscoveryAgent(QBluetoothAddress(adapterAddress));
-    discoveryAgent->setRemoteAddress(QBluetoothAddress(address));
-   // localDevice->requestPairing(QBluetoothAddress(address),QBluetoothLocalDevice::Paired);
     qDebug() << name << " " << address;
 }
